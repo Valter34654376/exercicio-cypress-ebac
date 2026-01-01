@@ -1,24 +1,22 @@
-describe('Testes da Agenda de Contatos', () => {
+describe('Agenda de Contatos EBAC', () => {
   const url = 'https://ebac-agenda-contatos-tan.vercel.app/';
 
   beforeEach(() => {
     cy.visit(url);
   });
 
-  it('Deve incluir um novo contato', () => {
+  it('Deve incluir um contato', () => {
     cy.get('input[name="nome"]').type('Fulano Teste');
     cy.get('input[name="email"]').type('fulano@test.com');
     cy.get('input[name="telefone"]').type('11999999999');
     cy.get('button').contains('Adicionar').click();
-
     cy.contains('Fulano Teste').should('exist');
   });
 
-  it('Deve alterar um contato existente', () => {
+  it('Deve alterar um contato', () => {
     cy.contains('Fulano Teste').parent().find('button').contains('Editar').click();
     cy.get('input[name="nome"]').clear().type('Fulano Alterado');
     cy.get('button').contains('Salvar').click();
-
     cy.contains('Fulano Alterado').should('exist');
   });
 
